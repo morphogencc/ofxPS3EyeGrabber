@@ -33,6 +33,8 @@
 
 #if defined(DEBUG)
 #define debug(x...) fprintf(stdout,x)
+#elif defined(_MSC_VER)
+#define debug(x, ...)
 #else
 #define debug(x...) 
 #endif

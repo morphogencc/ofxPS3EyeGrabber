@@ -2,6 +2,14 @@
 
 #include "ps3eye.h"
 
+#ifdef min
+#undef min
+#endif
+
+#ifdef max
+#undef max
+#endif
+
 #if defined WIN32 || defined _WIN32 || defined WINCE
 	#include <windows.h>
 #else
@@ -779,7 +787,7 @@ bool PS3EYECam::init(uint32_t width, uint32_t height, uint8_t desiredFrameRate)
 	ov534_reg_write(0xe7, 0x3a);
 	ov534_reg_write(0xe0, 0x08);
 
-#ifdef _MSC_VER
+#if defined WIN32 || defined _WIN32 || defined WINCE
 	Sleep(100);
 #else
     nanosleep((struct timespec[]){{0, 100000000}}, NULL);
@@ -790,7 +798,8 @@ bool PS3EYECam::init(uint32_t width, uint32_t height, uint8_t desiredFrameRate)
 
 	/* reset sensor */
 	sccb_reg_write(0x12, 0x80);
-#ifdef _MSC_VER
+
+#if defined WIN32 || defined _WIN32 || defined WINCE
 	Sleep(10);
 #else    
     nanosleep((struct timespec[]){{0, 10000000}}, NULL);
