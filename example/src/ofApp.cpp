@@ -29,7 +29,7 @@
 
 void ofApp::setup()
 {
-    vidGrabber.setGrabber(ofPtr<ofxPS3EyeGrabber>(new ofxPS3EyeGrabber()));
+    vidGrabber.setGrabber(std::shared_ptr<ofxPS3EyeGrabber>(new ofxPS3EyeGrabber()));
     vidGrabber.initGrabber(640, 480);
 }
 

@@ -82,6 +82,7 @@ void ofxPS3EyeGrabber::yuv422_to_rgba(const uint8_t* yuv_src,
 
 
 ofxPS3EyeGrabber::ofxPS3EyeGrabber():
+    _pixelFormat(OF_PIXELS_I420),
     _deviceId(0),
     _desiredFrameRate(60),
     _isFrameNew(true),
@@ -126,6 +127,7 @@ std::vector<ofVideoDevice> ofxPS3EyeGrabber::listDevices()
     return devices;
 }
 
+
 bool ofxPS3EyeGrabber::initGrabber(int w, int h)
 {
     if (!_cam)
@@ -143,7 +145,7 @@ bool ofxPS3EyeGrabber::initGrabber(int w, int h)
                 // We allocate the actual dimensions as they are restricted.
                 _pixels.allocate(_cam->getWidth(),
                                  _cam->getHeight(),
-                                 OF_PIXELS_RGBA);
+                                 _pixelFormat);
                 start();
                 return true;
             }
@@ -166,6 +168,12 @@ bool ofxPS3EyeGrabber::initGrabber(int w, int h)
 }
 
 
+bool ofxPS3EyeGrabber::isInitialized()
+{
+    return _cam != 0;
+}
+
+
 void ofxPS3EyeGrabber::update()
 {
     _isFrameNew = false;
@@ -174,11 +182,23 @@ void ofxPS3EyeGrabber::update()
     {
         if (_cam->isNewFrame())
         {
-            yuv422_to_rgba(_cam->getLastFramePointer(),
-                           _cam->getRowBytes(),
-                           _pixels.getPixels(),
-                           _cam->getWidth(),
-                           _cam->getHeight());
+            if (_pixelFormat == OF_PIXELS_RGBA)
+            {
+                yuv422_to_rgba(_cam->getLastFramePointer(),
+                               _cam->getRowBytes(),
+                               _pixels.getPixels(),
+                               _cam->getWidth(),
+                               _cam->getHeight());
+            }
+            else
+            {
+                _pixels.setFromAlignedPixels(_cam->getLastFramePointer(),
+                                             _cam->getWidth(),
+                                             _cam->getHeight(),
+                                             OF_PIXELS_RGBA,
+                                             _cam->getRowBytes());
+            }
+
 
             _isFrameNew = true;
 
@@ -255,10 +275,26 @@ float ofxPS3EyeGrabber::getWidth()
 
 bool ofxPS3EyeGrabber::setPixelFormat(ofPixelFormat pixelFormat)
 {
-	if (pixelFormat == OF_PIXELS_RGBA)
+    if (_pixelFormat == pixelFormat)
+        return true;
+
+    if (pixelFormat == OF_PIXELS_NATIVE ||
+        pixelFormat == OF_PIXELS_I420)
     {
+        _pixelFormat = OF_PIXELS_I420;
+        _pixels.allocate(_cam->getWidth(),
+                         _cam->getHeight(),
+                         _pixelFormat);
 		return true;
 	}
+    else if (pixelFormat == OF_PIXELS_RGBA)
+    {
+        _pixelFormat = pixelFormat;
+        _pixels.allocate(_cam->getWidth(),
+                         _cam->getHeight(),
+                         _pixelFormat);
+        return true;
+    }
     else
     {
         ofLogWarning("ofxPS3EyeGrabber::setPixelFormat") << "setPixelFormat(): requested pixel format " << pixelFormat << " not supported";
@@ -269,8 +305,7 @@ bool ofxPS3EyeGrabber::setPixelFormat(ofPixelFormat pixelFormat)
 
 ofPixelFormat ofxPS3EyeGrabber::getPixelFormat()
 {
-    // Can we return this directly from ofPixels?
-    return OF_PIXELS_RGBA;
+    return _pixelFormat;
 }
 
 

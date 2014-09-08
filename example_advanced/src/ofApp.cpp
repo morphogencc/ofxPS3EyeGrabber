@@ -54,6 +54,7 @@ void ofApp::setup()
 	vidGrabber.setDeviceID(0);
 	vidGrabber.setDesiredFrameRate(camFrameRate);
 	vidGrabber.initGrabber(camWidth, camHeight);
+//    vidGrabber.setPixelFormat(OF_PIXELS_NATIVE);
 
     vidGrabber.setAutogain(false);
     vidGrabber.setAutoWhiteBalance(false);

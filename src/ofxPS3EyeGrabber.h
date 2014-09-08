@@ -42,6 +42,8 @@ public:
     std::vector<ofVideoDevice> listDevices();
     bool initGrabber(int w, int h);
 
+    bool isInitialized();
+
     void update();
     bool isFrameNew();
 
@@ -122,6 +124,8 @@ private:
     PS3EYERef _cam;
     ofPixels _pixels;
 
+    ofPixelFormat _pixelFormat;
+
     int _deviceId;
     int _desiredFrameRate;
 
@@ -130,6 +134,8 @@ private:
     float _currentFPS;
     unsigned long long _lastSampleTime;
     unsigned long long _numFramesSampled;
+
+    
 
     enum
     {

@@ -5,34 +5,46 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>6B7EF1B0-C885-4248-A944-45113F83B6AB</string>
+	<string>AD2FC374-8F80-49A8-BD8D-355388B30DC1</string>
 	<key>IDESourceControlProjectName</key>
 	<string>example</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>3B34514A-1075-456B-8AF0-DAEFD698200B</key>
+		<key>87BC136C-196B-41C5-9A7F-2853DADC4C31</key>
 		<string>ssh://github.com/bakercp/openFrameworks.git</string>
+		<key>EA1DAE26-436D-4C99-83D7-DB7B2EABF791</key>
+		<string>ssh://github.com/bakercp/ofxPS3EyeGrabber.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>addons/ofxPS3EyeGrabber/example/example.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>3B34514A-1075-456B-8AF0-DAEFD698200B</key>
+		<key>87BC136C-196B-41C5-9A7F-2853DADC4C31</key>
 		<string>../../../../..</string>
+		<key>EA1DAE26-436D-4C99-83D7-DB7B2EABF791</key>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/bakercp/openFrameworks.git</string>
+	<string>ssh://github.com/bakercp/ofxPS3EyeGrabber.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>3B34514A-1075-456B-8AF0-DAEFD698200B</string>
+	<string>87BC136C-196B-41C5-9A7F-2853DADC4C31</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>3B34514A-1075-456B-8AF0-DAEFD698200B</string>
+			<string>EA1DAE26-436D-4C99-83D7-DB7B2EABF791</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxPS3EyeGrabber</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>87BC136C-196B-41C5-9A7F-2853DADC4C31</string>
 			<key>IDESourceControlWCCName</key>
 			<string>openFrameworks</string>
 		</dict>
