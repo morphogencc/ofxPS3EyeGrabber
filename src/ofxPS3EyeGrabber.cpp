@@ -82,7 +82,7 @@ void ofxPS3EyeGrabber::yuv422_to_rgba(const uint8_t* yuv_src,
 
 
 ofxPS3EyeGrabber::ofxPS3EyeGrabber():
-    _pixelFormat(OF_PIXELS_I420),
+    _pixelFormat(OF_PIXELS_YUY2),
     _deviceId(0),
     _desiredFrameRate(60),
     _isFrameNew(true),
@@ -195,7 +195,7 @@ void ofxPS3EyeGrabber::update()
                 _pixels.setFromAlignedPixels(_cam->getLastFramePointer(),
                                              _cam->getWidth(),
                                              _cam->getHeight(),
-                                             OF_PIXELS_RGBA,
+                                             _pixelFormat,
                                              _cam->getRowBytes());
             }
 
@@ -279,20 +279,28 @@ bool ofxPS3EyeGrabber::setPixelFormat(ofPixelFormat pixelFormat)
         return true;
 
     if (pixelFormat == OF_PIXELS_NATIVE ||
-        pixelFormat == OF_PIXELS_I420)
+        pixelFormat == OF_PIXELS_YUY2)
     {
-        _pixelFormat = OF_PIXELS_I420;
-        _pixels.allocate(_cam->getWidth(),
-                         _cam->getHeight(),
-                         _pixelFormat);
+        _pixelFormat = OF_PIXELS_YUY2;
+
+        if (_cam)
+        {
+            _pixels.allocate(_cam->getWidth(),
+                             _cam->getHeight(),
+                             _pixelFormat);
+        }
 		return true;
 	}
     else if (pixelFormat == OF_PIXELS_RGBA)
     {
         _pixelFormat = pixelFormat;
-        _pixels.allocate(_cam->getWidth(),
-                         _cam->getHeight(),
-                         _pixelFormat);
+        
+        if (_cam)
+        {
+            _pixels.allocate(_cam->getWidth(),
+                             _cam->getHeight(),
+                             _pixelFormat);
+        }
         return true;
     }
     else

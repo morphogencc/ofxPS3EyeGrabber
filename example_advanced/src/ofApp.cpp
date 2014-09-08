@@ -30,8 +30,8 @@ void ofApp::setup()
 {
     ofSetVerticalSync(false);
 
-	camWidth = 320;
-	camHeight = 240;
+	camWidth = 640;
+	camHeight = 480;
     camFrameRate = 120;
 
     //we can now get back a list of devices.
@@ -53,11 +53,13 @@ void ofApp::setup()
 
 	vidGrabber.setDeviceID(0);
 	vidGrabber.setDesiredFrameRate(camFrameRate);
+//    vidGrabber.setPixelFormat(OF_PIXELS_RGBA);
+//    vidGrabber.setPixelFormat(OF_PIXELS_YUY2);
+    vidGrabber.setPixelFormat(OF_PIXELS_NATIVE);
 	vidGrabber.initGrabber(camWidth, camHeight);
-//    vidGrabber.setPixelFormat(OF_PIXELS_NATIVE);
 
-    vidGrabber.setAutogain(false);
-    vidGrabber.setAutoWhiteBalance(false);
+    vidGrabber.setAutogain(true);
+    vidGrabber.setAutoWhiteBalance(true);
 
 }
 
