@@ -30,8 +30,8 @@
 void ofApp::setup()
 {
     // Set the video grabber to the ofxPS3EyeGrabber.
-    vidGrabber.setGrabber(std::make_shared<ofxPS3EyeGrabber>());
-    vidGrabber.setup(640, 480);
+	vidGrabber.setGrabber(std::make_shared<ofxPS3EyeGrabber>());
+	vidGrabber.setup(640, 480);
 }
 
 
