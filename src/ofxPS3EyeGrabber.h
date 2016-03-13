@@ -45,7 +45,7 @@ public:
 	void update();
 	bool isFrameNew();
 
-	ofPixels_<unsigned char>& getPixels();
+	unsigned char* getPixels();
 	ofPixels& getPixelsRef();
 
 	void close();
