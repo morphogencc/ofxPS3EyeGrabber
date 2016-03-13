@@ -101,7 +101,7 @@ ofxPS3EyeGrabber::~ofxPS3EyeGrabber()
 }
 
 
-std::vector<ofVideoDevice> ofxPS3EyeGrabber::listDevices()
+std::vector<ofVideoDevice> ofxPS3EyeGrabber::listDevices() const
 {
 	std::vector<ofVideoDevice> devices;
 
@@ -126,7 +126,7 @@ std::vector<ofVideoDevice> ofxPS3EyeGrabber::listDevices()
 	return devices;
 }
 
-bool ofxPS3EyeGrabber::initGrabber(int w, int h)
+bool ofxPS3EyeGrabber::setup(int w, int h)
 {
 	if (!_cam)
 	{
@@ -136,9 +136,9 @@ bool ofxPS3EyeGrabber::initGrabber(int w, int h)
 		{
 			_cam = eyeDevices[_deviceId];
 
-			bool success = _cam->init(w, h, _desiredFrameRate);
+			_isInitialized = _cam->init(w, h, _desiredFrameRate);
 
-			if (success)
+			if (_isInitialized)
 			{
 				// We allocate the actual dimensions as they are restricted.
 				_pixels.allocate(_cam->getWidth(),
@@ -154,17 +154,20 @@ bool ofxPS3EyeGrabber::initGrabber(int w, int h)
 		}
 		else
 		{
-			ofLogWarning("ofxPS3EyeGrabber::initGrabber") << "Device id is out of range: " << _deviceId;
+			ofLogWarning("ofxPS3EyeGrabber::setup") << "Device id is out of range: " << _deviceId;
 			return false;
 		}
 	}
 	else
 	{
-		ofLogWarning("ofxPS3EyeGrabber::initGrabber") << "Camera is already initialized.";
+		ofLogWarning("ofxPS3EyeGrabber::setup") << "Camera is already initialized.";
 		return false;
 	}
 }
 
+bool ofxPS3EyeGrabber::isInitialized() const {
+	return _isInitialized;
+}
 
 void ofxPS3EyeGrabber::update()
 {
@@ -202,12 +205,12 @@ void ofxPS3EyeGrabber::update()
 }
 
 
-bool ofxPS3EyeGrabber::isFrameNew()
+bool ofxPS3EyeGrabber::isFrameNew() const
 {
 	return _isFrameNew;
 }
 
-ofPixels& ofxPS3EyeGrabber::getPixels()
+const ofPixels& ofxPS3EyeGrabber::getPixels() const
 {
 	return _pixels;
 }
@@ -225,7 +228,7 @@ void ofxPS3EyeGrabber::close()
 }
 
 
-float ofxPS3EyeGrabber::getHeight()
+float ofxPS3EyeGrabber::getHeight() const
 {
 	if (_cam)
 	{
@@ -239,7 +242,7 @@ float ofxPS3EyeGrabber::getHeight()
 }
 
 
-float ofxPS3EyeGrabber::getWidth()
+float ofxPS3EyeGrabber::getWidth() const
 {
 	if (_cam)
 	{
@@ -267,7 +270,7 @@ bool ofxPS3EyeGrabber::setPixelFormat(ofPixelFormat pixelFormat)
 }
 
 
-ofPixelFormat ofxPS3EyeGrabber::getPixelFormat()
+ofPixelFormat ofxPS3EyeGrabber::getPixelFormat() const
 {
 	// Can we return this directly from ofPixels?
 	return OF_PIXELS_RGBA;

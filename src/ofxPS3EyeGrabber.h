@@ -37,24 +37,25 @@ class ofxPS3EyeGrabber :
 public:
 	ofxPS3EyeGrabber();
 
-	virtual ~ofxPS3EyeGrabber();
+	~ofxPS3EyeGrabber();
 
-	std::vector<ofVideoDevice> listDevices();
-	bool initGrabber(int w, int h);
+	std::vector<ofVideoDevice> listDevices() const;
+	bool setup(int w, int h);
+	bool isInitialized() const;
 
 	void update();
-	bool isFrameNew();
+	bool isFrameNew() const;
 
-	ofPixels& getPixels();
+	const ofPixels& getPixels() const;
 	ofPixels& getPixelsRef();
 
 	void close();
 
-	float getHeight();
-	float getWidth();
+	float getHeight() const;
+	float getWidth() const;
 
 	bool setPixelFormat(ofPixelFormat pixelFormat);
-	ofPixelFormat getPixelFormat();
+	ofPixelFormat getPixelFormat() const;
 
 	ofTexture* getTexture();
 
@@ -126,6 +127,7 @@ private:
 	int _desiredFrameRate;
 
 	bool _isFrameNew;
+	bool _isInitialized;
 
 	float _currentFPS;
 	unsigned long long _lastSampleTime;
