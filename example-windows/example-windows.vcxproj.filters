@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\ofApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxPS3EyeGrabber\src\ofxPS3EyeGrabber.cpp">
+      <Filter>addons\ofxPS3EyeGrabber\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxPS3EyeGrabber\libs\ps3eye\src\ps3eye.cpp">
+      <Filter>addons\ofxPS3EyeGrabber\libs\ps3eye\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxPS3EyeGrabber\libs\ps3eye\src\USBManager.cpp">
+      <Filter>addons\ofxPS3EyeGrabber\libs\ps3eye\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons">
+      <UniqueIdentifier>{71834F65-F3A9-211E-73B8-DC85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxPS3EyeGrabber">
+      <UniqueIdentifier>{879F5649-A068-9033-744D-3C93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxPS3EyeGrabber\src">
+      <UniqueIdentifier>{B4F69270-29CD-FAF3-4F0B-60A3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxPS3EyeGrabber\libs">
+      <UniqueIdentifier>{B0456E77-7716-048A-C75E-9A55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxPS3EyeGrabber\libs\libusb-1.0">
+      <UniqueIdentifier>{19155EEF-F29D-AEFE-0226-1F3B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxPS3EyeGrabber\libs\libusb-1.0\include">
+      <UniqueIdentifier>{027CA462-8DA6-0F9A-6783-67A4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxPS3EyeGrabber\libs\libusb-1.0\include\libusb-1.0">
+      <UniqueIdentifier>{6A56F586-AC48-8C50-084C-B6AD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxPS3EyeGrabber\libs\ps3eye">
+      <UniqueIdentifier>{58C4514A-FA8D-D65F-43DC-B275}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxPS3EyeGrabber\libs\ps3eye\src">
+      <UniqueIdentifier>{1AC442BD-EBD7-9791-E361-AD39}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\ofApp.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxPS3EyeGrabber\src\ofxPS3EyeGrabber.h">
+      <Filter>addons\ofxPS3EyeGrabber\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxPS3EyeGrabber\libs\libusb-1.0\include\libusb-1.0\libusb.h">
+      <Filter>addons\ofxPS3EyeGrabber\libs\libusb-1.0\include\libusb-1.0</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxPS3EyeGrabber\libs\ps3eye\src\ps3eye.h">
+      <Filter>addons\ofxPS3EyeGrabber\libs\ps3eye\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxPS3EyeGrabber\libs\ps3eye\src\USBManager.h">
+      <Filter>addons\ofxPS3EyeGrabber\libs\ps3eye\src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc" />
+  </ItemGroup>
+</Project>
