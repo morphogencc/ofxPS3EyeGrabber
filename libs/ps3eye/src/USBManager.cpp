@@ -3,6 +3,13 @@
 #include "USBManager.h"
 #include <iostream>
 
+#ifdef min
+#undef min
+#endif
+
+#ifdef max
+#undef max
+#endif
 
 bool URBDesc::handleEvents()
 {

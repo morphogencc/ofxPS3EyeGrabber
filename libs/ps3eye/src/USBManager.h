@@ -5,6 +5,7 @@
 
 #include <memory>
 #include <vector>
+#include <chrono>
 #include <cstring>
 #include "libusb.h"
 #include "ps3eye.h"

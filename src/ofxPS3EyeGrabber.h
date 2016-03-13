@@ -1,6 +1,6 @@
 // =============================================================================
 //
-// Copyright (c) 2014-2015 Christopher Baker <http://christopherbaker.net>
+// Copyright (c) 2014 Christopher Baker <http://christopherbaker.net>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,234 +23,117 @@
 // =============================================================================
 
 
-#pragma once
-
-
-#include "ofBaseTypes.h"
-#include "ofTypes.h"
-#include "ofEvents.h"
 #include "ofThread.h"
+#include "ofTypes.h"
+#include "ofBaseTypes.h"
+#include "ofEvents.h"
 #include "ps3eye.h"
 
 
-/// \brief Create an ofxPS3EyeGrabber.
-class ofxPS3EyeGrabber:
-    public ofBaseVideoGrabber,
-    public ofThread
+class ofxPS3EyeGrabber :
+	public ofBaseVideoGrabber,
+	public ofThread
 {
 public:
-    /// \brief Create an uninitialized ofxPS3EyeGrabber.
-    ofxPS3EyeGrabber();
+	ofxPS3EyeGrabber();
 
-    /// \brief Destroy the PS3EyeGrabber.
-    virtual ~ofxPS3EyeGrabber();
+	virtual ~ofxPS3EyeGrabber();
 
-    /// \brief Callback for an exit event.
-    /// \param args the event callback parameter.
-    void exit(ofEventArgs& args);
-    void start();
-    void stop();
+	std::vector<ofVideoDevice> listDevices();
+	bool initGrabber(int w, int h);
 
-    std::vector<ofVideoDevice> listDevices() const override;
-    bool setup(int w, int h) override;
-    void update() override;
-    bool isFrameNew() const override;
-    bool isInitialized() const override;
-    ofPixels& getPixels() override;
-    const ofPixels& getPixels() const override;
-    void close() override;
-    float getHeight() const override;
-    float getWidth() const override;
+	void update();
+	bool isFrameNew();
 
-    /// \brief Set the requested ofPixelFormat.
-    ///
-    /// The grabber can output the following pixel ofPixelFormats:
-    ///
-    ///     OF_PIXELS_RGB (default)
-    ///     OF_PIXELS_RGBA
-    ///     OF_PIXELS_YUY2
-    ///     OF_PIXELS_NATIVE
-    ///
-    /// OF_PIXELS_NATIVE defaults to OF_PIXELS_YUY2 and requires no colorspace
-    /// conversion of pixels copying.
-    ///
-    /// \param pixelFormat the requested ofPixelFormat.
-    /// \returns true if the format was successfully changed.
-    bool setPixelFormat(ofPixelFormat pixelFormat) override;
-    ofPixelFormat getPixelFormat() const override;
-    void setVerbose(bool verbose) override;
-    void setDeviceID(int deviceId) override;
-    void setDesiredFrameRate(int framerate) override;
-    void videoSettings() override;
+	ofPixels_<unsigned char>& getPixels();
+	ofPixels& getPixelsRef();
 
-    void threadedFunction() override;
+	void close();
 
-    /// \returns true iff auto gain is enabled.
-    bool getAutogain() const;
+	float getHeight();
+	float getWidth();
 
-    /// \brief Set the auto gain.
-    /// \param val the auto gain value.
-    void setAutogain(bool val);
+	bool setPixelFormat(ofPixelFormat pixelFormat);
+	ofPixelFormat getPixelFormat();
 
-    /// \returns true iff auto white balance is enabled.
-    bool getAutoWhiteBalance() const;
+	ofTexture* getTexture();
 
-    /// \brief Set the auto white balance.
-    /// \param val the auto white balance value.
-    void setAutoWhiteBalance(bool val);
+	void setVerbose(bool verbose);
+	void setDeviceID(int deviceId);
+	void setDesiredFrameRate(int framerate);
+	void videoSettings();
 
-    /// \returns the current gain setting.
-    uint8_t getGain() const;
+	bool getAutogain() const;
+	void setAutogain(bool val);
 
-    /// \brief Set the camera's gain.
-    /// \param val a gain between 0-63.
-    void setGain(uint8_t val);
+	bool getAutoWhiteBalance() const;
+	void setAutoWhiteBalance(bool val);
 
-    /// \returns the current exposure setting.
-    uint8_t getExposure() const;
+	uint8_t getGain() const;
+	void setGain(uint8_t val);
 
-    /// \brief Set the camera's exposure.
-    /// \param val an exposure between 0-255.
-    void setExposure(uint8_t val);
+	uint8_t getExposure() const;
+	void setExposure(uint8_t val);
 
-    /// \returns the current sharpness setting.
-    /// \param val a sharpness between 0-63.
-    uint8_t getSharpness() const;
+	uint8_t getSharpness() const;
+	void setSharpness(uint8_t val);
 
-    /// \brief Set the camera's sharpness.
-    void setSharpness(uint8_t val);
+	uint8_t getContrast() const;
+	void setContrast(uint8_t val);
 
-    /// \returns the current contrast setting.
-    uint8_t getContrast() const;
+	uint8_t getBrightness() const;
+	void setBrightness(uint8_t val);
 
-    /// \brief Set the camera's contrast.
-    /// \param val a contrast between 0-255.
-    void setContrast(uint8_t val);
+	uint8_t getHue() const;
+	void setHue(uint8_t val);
 
-    /// \returns the current brightness setting.
-    uint8_t getBrightness() const;
+	uint8_t getRedBalance() const;
+	void setRedBalance(uint8_t val);
 
-    /// \brief Set the camera's brightness.
-    /// \param val a brightness between 0-255.
-    void setBrightness(uint8_t val);
+	uint8_t getBlueBalance() const;
+	void setBlueBalance(uint8_t val);
 
-    /// \returns the current hue setting.
-    uint8_t getHue() const;
+	void setFlip(bool horizontal = false, bool vertical = false);
 
-    /// \brief Set the camera's hue.
-    /// \param val a hue between 0-255.
-    void setHue(uint8_t val);
-
-    /// \returns the current red balance setting.
-    uint8_t getRedBalance() const;
-
-    /// \brief Set the camera's red balance.
-    /// \param val a red balance between 0-255.
-    void setRedBalance(uint8_t val);
-
-    /// \returns the current blue balance setting.
-    uint8_t getBlueBalance() const;
-
-    /// \brief Set the camera's blue balance.
-    /// \param val a blue balance between 0-255.
-    void setBlueBalance(uint8_t val);
-
-    /// \returns the current green balance setting.
-    uint8_t getGreenBalance() const;
-
-    /// \brief Set the camera's green balance.
-    /// \param val a blue balance between 0-255.
-    void setGreenBalance(uint8_t val);
-
-    /// \brief Flip the camera's image.
-    /// \param enable true for a vertical flip.
-    void setVerticalFlip(bool enable);
-
-    /// \brief Flip the camera's image.
-    /// \param enable true for a horizontal flip.
-    void setHorizontalFlip(bool enable);
-
-    /// \brief Enable a test pattern overlay.
-    /// \param enable true for a test pattern.
-    void setTestPattern(bool enable);
-
-    /// \brief Enable the LED.
-    /// \param enable True if the LED should be enabled.
-    void setLED(bool enable);
-
-    /// \returns the camera's current FPS value.
-    float getFPS() const;
-
-    /// \returns the camera's current actual FPS value.
-    float getActualFPS() const;
+	float getFPS() const;
 
 protected:
-    /// \brief Constant used for YUV conversion.
-    static const int ITUR_BT_601_CY;
+	typedef ps3eye::PS3EYECam::PS3EYERef PS3EYERef;
 
-    /// \brief Constant used for YUV conversion.
-    static const int ITUR_BT_601_CUB;
+	static const int ITUR_BT_601_CY;
+	static const int ITUR_BT_601_CUB;
+	static const int ITUR_BT_601_CUG;
+	static const int ITUR_BT_601_CVG;
+	static const int ITUR_BT_601_CVR;
+	static const int ITUR_BT_601_SHIFT;
 
-    /// \brief Constant used for YUV conversion.
-    static const int ITUR_BT_601_CUG;
+	static void yuv422_to_rgba(const uint8_t *yuv_src,
+		const int stride,
+		uint8_t *dst,
+		const int width,
+		const int height);
 
-    /// \brief Constant used for YUV conversion.
-    static const int ITUR_BT_601_CVG;
-
-    /// \brief Constant used for YUV conversion.
-    static const int ITUR_BT_601_CVR;
-
-    /// \brief Constant used for YUV conversion.
-    static const int ITUR_BT_601_SHIFT;
-
-    /// \brief Convert YUV422 to RGBA8888
-    /// \param yuv_source a pointer to the YUV data source.
-    /// \param strid the YUV data stride.
-    /// \param destination the destination RGBA8888 pixels.
-    /// \param width the pixel width.
-    /// \param height the pixel height.
-    static void yuv422_to_rgba8888(const uint8_t* yuv_source,
-                                   const int stride,
-                                   uint8_t* destination,
-                                   const int width,
-                                   const int height);
-
-    /// \brief Convert YUV422 to RGB888
-    /// \param yuv_source a pointer to the YUV data source.
-    /// \param strid the YUV data stride.
-    /// \param destination the destination RGB888 pixels.
-    /// \param width the pixel width.
-    /// \param height the pixel height.
-    static void yuv422_to_rgb888(const uint8_t* yuv_source,
-                                 const int stride,
-                                 uint8_t* destination,
-                                 const int width,
-                                 const int height);
-
+	void exit(ofEventArgs& args);
+	void start();
+	void stop();
+	void threadedFunction();
 
 private:
-    /// \brief A shared pointer to the underlying camera device.
-    std::shared_ptr<ps3eye::PS3EYECam> _cam;
+	PS3EYERef _cam;
+	ofPixels _pixels;
 
-    /// \brief An internal copy (or pointer) to the camera pixels.
-    ofPixels _pixels;
+	int _deviceId;
+	int _desiredFrameRate;
 
-    /// \brief The device id.
-    std::size_t _deviceId;
+	bool _isFrameNew;
 
-    /// \brief The desired framerate.
-    int _desiredFrameRate;
+	float _currentFPS;
+	unsigned long long _lastSampleTime;
+	unsigned long long _numFramesSampled;
 
-    /// \brief True if the frame is new.
-    bool _isFrameNew;
-
-    /// \brief The desired pixel format.
-    ofPixelFormat _pixelFormat;
-
-    enum
-    {
-        /// \brief The default FPS sample interval in milliseconds.
-        FPS_SAMPLE_INTERVAL = 500
-    };
+	enum
+	{
+		FPS_SAMPLE_INTERVAL = 500 // milliseconds
+	};
 
 };

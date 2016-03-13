@@ -1,6 +1,7 @@
 // From: https://github.com/inspirit/PS3EYEDriver/
 
 #include "ps3eye.h"
+#include <algorithm>
 
 #ifdef min
 #undef min
