@@ -210,6 +210,11 @@ bool ofxPS3EyeGrabber::isFrameNew() const
 	return _isFrameNew;
 }
 
+ofPixels& ofxPS3EyeGrabber::getPixels()
+{
+	return _pixels;
+}
+
 const ofPixels& ofxPS3EyeGrabber::getPixels() const
 {
 	return _pixels;

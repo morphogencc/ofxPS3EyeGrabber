@@ -46,6 +46,7 @@ public:
 	void update();
 	bool isFrameNew() const;
 
+	ofPixels& getPixels();
 	const ofPixels& getPixels() const;
 	ofPixels& getPixelsRef();
 
