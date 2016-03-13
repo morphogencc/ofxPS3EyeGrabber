@@ -207,9 +207,9 @@ bool ofxPS3EyeGrabber::isFrameNew()
 	return _isFrameNew;
 }
 
-unsigned char* ofxPS3EyeGrabber::getPixels()
+ofPixels& ofxPS3EyeGrabber::getPixels()
 {
-	return _pixels.getPixels();
+	return _pixels;
 }
 
 
