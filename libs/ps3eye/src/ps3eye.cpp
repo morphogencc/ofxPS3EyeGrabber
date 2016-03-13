@@ -7,6 +7,24 @@
 #include <cstring>
 #include <thread>
 
+#ifdef min
+#undef min
+#endif
+
+#ifdef max
+#undef max
+#endif
+
+#if defined WIN32 || defined _WIN32 || defined WINCE
+	#include <windows.h>
+#else
+	#include <sys/time.h>
+	#include <time.h>
+	#if defined __MACH__ && defined __APPLE__
+		#include <mach/mach.h>
+		#include <mach/mach_time.h>
+	#endif
+#endif
 
 namespace ps3eye {
 
@@ -940,13 +958,32 @@ void PS3EYECam::setGreenBalance(uint8_t val)
 }
 
 
+<<<<<<< HEAD
 void PS3EYECam::setVerticalFlip(bool enable)
 {
     flip_v = enable;
+=======
+#if defined WIN32 || defined _WIN32 || defined WINCE
+	Sleep(100);
+#else
+    nanosleep((struct timespec[]){{0, 100000000}}, NULL);
+#endif
+>>>>>>> windows_fix
 
     uint8_t val = sccb_reg_read(OV772X_REG_COM3);
 
+<<<<<<< HEAD
     val &= ~0b10000000;
+=======
+	/* reset sensor */
+	sccb_reg_write(0x12, 0x80);
+
+#if defined WIN32 || defined _WIN32 || defined WINCE
+	Sleep(10);
+#else    
+    nanosleep((struct timespec[]){{0, 10000000}}, NULL);
+#endif
+>>>>>>> windows_fix
 
     if (!flip_v)
     {

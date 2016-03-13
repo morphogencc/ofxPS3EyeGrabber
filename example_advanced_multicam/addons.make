@@ -1,2 +1,1 @@
-ofxKinect
 ofxPS3EyeGrabber
